@@ -5,8 +5,10 @@ class LessThanHistorical extends ReturnValue
   onEnvelope: (envelope) =>
     { config, message, data } = envelope
     { left } = config
-    right = data
+    right = data?.left
 
+    return message unless right?
+    
     [typedLeft, typedRight] = sameType [left, right]
     return message if typedLeft < typedRight
 
